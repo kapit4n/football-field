@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing</p>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()" style="display: block;">
+      <span>(0)</span>
+    </button>
+    <br />
+    <app-cancha-container style="display: block;"></app-cancha-container>
+  </div>
+
+</mat-drawer-container>

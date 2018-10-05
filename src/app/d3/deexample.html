@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testing animations</title>
+  <meta charset="utf-8" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.6.1/leaflet.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+  <style>
+  #info {
+    background-color:#c8ba09;
+  </style>
+</head>
+<body>
+  <div id="info"style="width: 960px;"></div>
+  <script>
+  var minArea, curColor;
+
+  var svg = d3.select("body").append("svg")
+    .attr("width", 960)
+    .attr("height", 300);
+
+  var circles = svg.append('circle').attr('cx',50).attr('cy',50).attr('r',20).style('fill','rgb(255,0,255)')
+
+  animation();
+
+  function animation() {
+    svg.transition()
+        .duration(7500)
+        .tween("precision", function() {
+          var area = d3.interpolateRound(50, 600);
+          var color = d3.interpolateRgb('rgb(255,0,255)', 'rgb(0,255,0)');
+          return function(t) {
+            minArea = area(t);
+            curColor = color(t)
+            render();
+          };
+        })
+      .transition()
+        .duration(7500)
+        .tween("precision", function() {
+          var area = d3.interpolateRound(600, 50);
+          var color = d3.interpolateRgb('rgb(0,255,0)', 'rgb(255,0,255)');
+          return function(t) {
+            minArea = area(t);
+            curColor = color(t)
+            render();
+          };
+        })
+      .transition()
+        .duration(2500)
+        .each("end", animation);
+  }
+
+  function render() {
+    var n = 0;
+    
+    var color = 'rgb(' + curColor.r + ',' + curColor.g + ',' + curColor.b + ')'
+    circles.attr('cx',minArea).style('fill',color);
+
+    console.log(color)
+
+    //text.text(formatArea(minArea) + "px² / " + formatPercent(n / m));
+  }
+
+  </script>
+ </body>
+</html>

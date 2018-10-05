@@ -11,7 +11,7 @@ export class CanchaContainerComponent implements OnInit {
   svg: any;
   ball: any;
   constructor() {
-    this.vertical = true;
+    this.vertical = false;
   }
 
   ngOnInit() {

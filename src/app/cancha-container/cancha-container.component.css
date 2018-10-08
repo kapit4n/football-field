@@ -1,0 +1,13 @@
+image:hover {
+  opacity: 0.5;
+}
+
+rect {
+    fill:none;
+    stroke-width:2;
+    stroke:white;
+}
+
+rect:hover {
+  fill: #e3efe6;
+}

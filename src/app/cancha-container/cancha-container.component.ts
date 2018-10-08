@@ -18,17 +18,19 @@ export class CanchaContainerComponent implements OnInit {
   destiny: any;
   origin: any;
 
+  routes: any[];
+
   constructor() {
     this.vertical = false;
     this.origin = {x: 1, y: 120};
     this.destiny = {x: 120, y: 120};
+    this.routes = [];
   }
 
   ngOnInit() {
   }
 
   animation() {
-
     if (!this.svg) {
       this.svg = d3.select('#field1');
       this.images = d3.select('#image1');
@@ -48,9 +50,20 @@ export class CanchaContainerComponent implements OnInit {
           self.curColor = color(t);
           self.render();
         };
-      })
-      .transition()
-      .duration(2000);
+      }).on('end', () => {
+        if (this.routes.length > 0) {
+          this.origin.x = this.destiny.x;
+          this.origin.y = this.destiny.y;
+          this.destiny.x = this.routes[0].x;
+          this.destiny.y = this.routes[0].y;
+          this.routes =  this.routes.splice(1);
+          console.log('END0');
+          this.animation();
+        } else {
+          console.log('END1');
+        }
+
+      });
   }
 
   render() {
@@ -58,11 +71,18 @@ export class CanchaContainerComponent implements OnInit {
   }
 
   goHere(event) {
-    this.origin.x = this.destiny.x;
-    this.origin.y = this.destiny.y;
-    this.destiny.x = event.offsetX;
-    this.destiny.y = event.offsetY;
-    this.animation();
+    if (this.routes.length > 0) {
+      this.routes.push({ x: event.offsetX, y: event.offsetY});
+    } else {
+      this.routes.push({ x: event.offsetX, y: event.offsetY});
+      this.origin.x = this.destiny.x;
+      this.origin.y = this.destiny.y;
+      this.destiny.x = event.offsetX;
+      this.destiny.y = event.offsetY;
+      this.animation();
+    }
+
+
   }
 
   changeOrientation() {

@@ -22,8 +22,8 @@ export class CanchaContainerComponent implements OnInit {
 
   constructor() {
     this.vertical = false;
-    this.origin = {x: 1, y: 120};
-    this.destiny = {x: 120, y: 120};
+    this.origin = {x: 200, y: 200};
+    this.destiny = { x: 200, y: 200};
     this.routes = [];
   }
 
@@ -81,12 +81,14 @@ export class CanchaContainerComponent implements OnInit {
       this.destiny.y = event.offsetY;
       this.animation();
     }
-
-
   }
 
   changeOrientation() {
     this.vertical = !this.vertical;
+  }
+
+  stopTransition() {
+    d3.selectAll('image').transition();
   }
 
   clickAction() {

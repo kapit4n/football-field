@@ -1,5 +1,6 @@
 <button (click)="changeOrientation()">Orientation</button>
 <button (click)="clickAction()">Run</button>
+<button (click)="stopTransition()">Stop</button>
 
 <div style="width: 300px; height: 550px; background-color: white; padding: 10px;border: solid; border-width: 1px;"
   *ngIf="vertical">
@@ -87,7 +88,6 @@
       <image x="425" y="240" xlink:href="http://icons.iconarchive.com/icons/iconshock/dragonball/128/dragonball-4-icon.png" height="30px" width="30px"  (click)="goHere($event)" />
       
       <image x="500" y="135" xlink:href="http://icons.iconarchive.com/icons/iconshock/dragonball/128/dragonball-4-icon.png" height="30px" width="30px"  (click)="goHere($event)" />
-      
     </svg>
   </div>
 </div>
